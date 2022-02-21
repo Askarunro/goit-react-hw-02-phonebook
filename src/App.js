@@ -46,6 +46,11 @@ class App extends Component {
 
   // }
 
+  onClickDelete=(e)=>{
+    
+  }
+
+
   render() {
     return (
       <div>
@@ -85,18 +90,13 @@ class App extends Component {
           </label>
 
           <ul>
-            {/* {this.state.contacts.find(option=>option.name === "name").map((contact) => (
-              <li key={contact.name}>
-                <p>{contact.name}:</p>
-                <p>{contact.number}</p>
-              </li>
-            ))} */}
             {this.state.contacts
               .filter((option) => option.name.includes(this.state.filter))
               .map((contact) => (
                 <li key={contact.name}>
                   <p>{contact.name}:</p>
                   <p>{contact.number}</p>
+                  <button type="button" onClick={this.onClickDelete}>Delete</button>
                 </li>
               ))}
           </ul>
