@@ -32,20 +32,19 @@ class App extends Component {
     this.reset();
   };
 
-  onChangeInputFind = (e)=>{
-    this.setState({filter: e.currentTarget.value})
+  onChangeInputFind = (e) => {
+    this.setState({ filter: e.currentTarget.value });
     // this.test()
     // this.state.contacts.find(contact=>contact.name===e.currentTarget.value)
     // console.log(this.state.contacts.map.find(e.currentTarget.value))
-  }
+  };
 
   // test=()=>{
-    
+
   //   this.state.contacts.filter(option=>option.name.includes(this.state.filter))
   //   console.log(this.state.contacts.filter(option=>option.name.includes(this.state.filter)))
 
   // }
-
 
   render() {
     return (
@@ -82,25 +81,24 @@ class App extends Component {
           <h2>Contacts</h2>
           <label>
             Find contacts by name
-            <input 
-            type="text"
-            onChange={this.onChangeInputFind}
-            />
+            <input type="text" onChange={this.onChangeInputFind} />
           </label>
 
           <ul>
-          {/* {this.state.contacts.find(option=>option.name === "name").map((contact) => (
+            {/* {this.state.contacts.find(option=>option.name === "name").map((contact) => (
               <li key={contact.name}>
                 <p>{contact.name}:</p>
                 <p>{contact.number}</p>
               </li>
             ))} */}
-            {this.state.contacts.filter(option=>option.name.includes(this.state.filter)).map((contact) => (
-              <li key={contact.name}>
-                <p>{contact.name}:</p>
-                <p>{contact.number}</p>
-              </li>
-            ))}
+            {this.state.contacts
+              .filter((option) => option.name.includes(this.state.filter))
+              .map((contact) => (
+                <li key={contact.name}>
+                  <p>{contact.name}:</p>
+                  <p>{contact.number}</p>
+                </li>
+              ))}
           </ul>
         </div>
       </div>
