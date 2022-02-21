@@ -7,7 +7,7 @@ class App extends Component {
   clientId = nanoid();
   state = {
     contacts: [],
-    filter: '',
+    filter: "",
     name: "",
     number: "",
   };
@@ -20,20 +20,31 @@ class App extends Component {
     this.setState({ number: e.currentTarget.value });
   };
 
-
-  reset =()=>{
-    this.setState({ name: "",
-    number: ""});
-  }
+  reset = () => {
+    this.setState({ name: "", number: "" });
+  };
 
   onSubmitForm = (e) => {
     e.preventDefault();
     const a = this.state.name;
     const b = this.state.number;
-    this.state.contacts.push({ name: a, number:b});
-    this.reset()
+    this.state.contacts.push({ name: a, number: b });
+    this.reset();
   };
 
+  onChangeInputFind = (e)=>{
+    this.setState({filter: e.currentTarget.value})
+    // this.test()
+    // this.state.contacts.find(contact=>contact.name===e.currentTarget.value)
+    // console.log(this.state.contacts.map.find(e.currentTarget.value))
+  }
+
+  // test=()=>{
+    
+  //   this.state.contacts.filter(option=>option.name.includes(this.state.filter))
+  //   console.log(this.state.contacts.filter(option=>option.name.includes(this.state.filter)))
+
+  // }
 
 
   render() {
@@ -54,7 +65,7 @@ class App extends Component {
           </label>
           <label>
             Number
-          <input
+            <input
               type="tel"
               name="number"
               value={this.state.number}
@@ -69,14 +80,26 @@ class App extends Component {
         </form>
         <div>
           <h2>Contacts</h2>
-          <label>Find contacts by name
-          <input></input>
+          <label>
+            Find contacts by name
+            <input 
+            type="text"
+            onChange={this.onChangeInputFind}
+            />
           </label>
-          
+
           <ul>
-            {this.state.contacts.map((contact) => (
-              <li key={contact.name}><p>{contact.name}</p>
-              <p>{contact.number}</p></li>
+          {/* {this.state.contacts.find(option=>option.name === "name").map((contact) => (
+              <li key={contact.name}>
+                <p>{contact.name}:</p>
+                <p>{contact.number}</p>
+              </li>
+            ))} */}
+            {this.state.contacts.filter(option=>option.name.includes(this.state.filter)).map((contact) => (
+              <li key={contact.name}>
+                <p>{contact.name}:</p>
+                <p>{contact.number}</p>
+              </li>
             ))}
           </ul>
         </div>
