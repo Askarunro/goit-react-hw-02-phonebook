@@ -1,53 +1,45 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { nanoid } from "nanoid";
-import react, { Component } from "react";
+import React, { Component } from "react";
 import ContactForm from "./components/ContactForm";
 import Filter from "./components/Filter";
 import ContactList from "./components/ContactList";
-import { logDOM } from "@testing-library/react";
 
 class App extends Component {
   clientId = nanoid();
   state = {
     contacts: [],
     filter: "",
-    name: "",
-    number: "",
+    // todos: initialTodos,
   };
 
-  onChangeInputName = (evt) => {
-    this.setState({ name: evt.currentTarget.value });
-  };
+  formSubmitHandler = (data) => {
 
-  onChangeInputNumber = (e) => {
-    this.setState({ number: e.currentTarget.value });
-  };
-
-  reset = () => {
-    this.setState({ name: "", number: "" });
-  };
-
-  onSubmitForm = (e) => {
-    e.preventDefault();
-
-    let exist = false
-    this.state.contacts.forEach(contact=>{
-      if(contact.name===this.state.name){
-        exist=true
+    let exist = false;
+    this.state.contacts.forEach((contact) => {
+      if (contact.name === data.name) {
+        exist = true;
       }
-    })
-    if(!exist){
+    });
+    if (!exist) {
+      this.setState({
+        contacts: [ ...this.state.contacts, data]}
+      )
+    } else alert(`${data.name} is already i contacts`);
 
-      this.state.contacts.push({
-        name: this.state.name,
-        number: this.state.number,
-      });
 
-    }
-    else alert(`${this.state.name} is already i contacts`);
-  
-    this.reset();
+    // let exist = false;
+    // this.state.contacts.forEach((contact) => {
+    //   if (contact.name === data.name) {
+    //     exist = true;
+    //   }
+    // });
+    // if (!exist) {
+    //   this.state.contacts.push({
+    //     name: data.name,
+    //     number: data.number,
+    //   });
+    // } else alert(`${data.name} is already i contacts`);
   };
 
   onChangeInputFind = (e) => {
@@ -55,8 +47,10 @@ class App extends Component {
   };
 
   onClickDelete = (e) => {
-    let x = this.state.contacts.findIndex(contact=>contact.name===e.currentTarget.parentNode.dataset.id)
-    this.state.contacts.splice(x,1)
+    let x = this.state.contacts.findIndex(
+      (contact) => contact.name === e.currentTarget.parentNode.dataset.id
+    );
+    this.state.contacts.splice(x, 1);
   };
 
   render() {
@@ -64,19 +58,18 @@ class App extends Component {
       <div>
         <h1>Phonebook</h1>
         <ContactForm
-          onSubmit={this.onSubmitForm}
-          onChangeName={this.onChangeInputName}
-          onChangeNumber={this.onChangeInputNumber}
-          nameValue={this.state.name}
-          numberValue={this.state.number}
+          onSubmit={this.formSubmitHandler}
+          // contacts={this.state.contacts}
         />
         <h2>Contacts</h2>
         <Filter onChange={this.onChangeInputFind} />
-        <ContactList
-          contacts={this.state.contacts}
-          filter={this.state.filter}
-          onClick={this.onClickDelete}
-        />
+        {this.state.contacts.lenght !== 0 && (
+          <ContactList
+            contacts={this.state.contacts}
+            filter={this.state.filter}
+            onClick={this.onClickDelete}
+          />
+        )}
       </div>
     );
   }

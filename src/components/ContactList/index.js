@@ -1,2 +1,1 @@
-import List from './ContactList'
-export default List
+export {default} from './ContactList'

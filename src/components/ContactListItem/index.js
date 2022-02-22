@@ -1,3 +1,1 @@
-import Item from './ContactListItem'
-
-export default Item
+export {default} from './ContactListItem'
