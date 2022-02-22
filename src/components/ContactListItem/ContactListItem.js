@@ -6,7 +6,7 @@ function Item({contacts,filter,onClick}) {
       {contacts
         .filter((option) => option.name.toLowerCase().includes(filter))
         .map((contact) => (
-          <li key={contact.name} className={i.item}>
+          <li key={contact.name} className={i.item} data-id={contact.name}>
             <p>{contact.name}:</p>
             <p>{contact.number}</p>
             <button type="button" onClick={onClick} className={i.btn}>

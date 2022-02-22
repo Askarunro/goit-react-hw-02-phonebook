@@ -5,6 +5,7 @@ import react, { Component } from "react";
 import ContactForm from "./components/ContactForm";
 import Filter from "./components/Filter";
 import ContactList from "./components/ContactList";
+import { logDOM } from "@testing-library/react";
 
 class App extends Component {
   clientId = nanoid();
@@ -29,28 +30,33 @@ class App extends Component {
 
   onSubmitForm = (e) => {
     e.preventDefault();
-    const a = this.state.name;
-    const b = this.state.number;
-    this.state.contacts.push({ name: a, number: b });
+
+    let exist = false
+    this.state.contacts.forEach(contact=>{
+      if(contact.name===this.state.name){
+        exist=true
+      }
+    })
+    if(!exist){
+
+      this.state.contacts.push({
+        name: this.state.name,
+        number: this.state.number,
+      });
+
+    }
+    else alert(`${this.state.name} is already i contacts`);
+  
     this.reset();
   };
 
   onChangeInputFind = (e) => {
     this.setState({ filter: e.currentTarget.value });
-    // this.test()
-    // this.state.contacts.find(contact=>contact.name===e.currentTarget.value)
-    // console.log(this.state.contacts.map.find(e.currentTarget.value))
   };
 
-  // test=()=>{
-
-  //   this.state.contacts.filter(option=>option.name.includes(this.state.filter))
-  //   console.log(this.state.contacts.filter(option=>option.name.includes(this.state.filter)))
-
-  // }
-
   onClickDelete = (e) => {
-    console.log(e.currentTarget.parentNode)
+    let x = this.state.contacts.findIndex(contact=>contact.name===e.currentTarget.parentNode.dataset.id)
+    this.state.contacts.splice(x,1)
   };
 
   render() {
@@ -64,13 +70,13 @@ class App extends Component {
           nameValue={this.state.name}
           numberValue={this.state.number}
         />
-          <h2>Contacts</h2>
-          <Filter onChange={this.onChangeInputFind} />
-          <ContactList
-            contacts={this.state.contacts}
-            filter={this.state.filter}
-            onClick={this.onClickDelete}
-          />
+        <h2>Contacts</h2>
+        <Filter onChange={this.onChangeInputFind} />
+        <ContactList
+          contacts={this.state.contacts}
+          filter={this.state.filter}
+          onClick={this.onClickDelete}
+        />
       </div>
     );
   }
