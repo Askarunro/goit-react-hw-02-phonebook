@@ -9,7 +9,7 @@ function Item({contacts,filter,onClick}) {
           <li key={contact.name} className={i.item} data-id={contact.name}>
             <p>{contact.name}:</p>
             <p>{contact.number}</p>
-            <button type="button" onClick={onClick} className={i.btn}>
+            <button type="button" onClick={()=>onClick(contact.name)} className={i.btn}>
               Delete
             </button>
           </li>

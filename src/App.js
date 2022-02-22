@@ -46,12 +46,18 @@ class App extends Component {
     this.setState({ filter: e.currentTarget.value });
   };
 
-  onClickDelete = (e) => {
-    let x = this.state.contacts.findIndex(
-      (contact) => contact.name === e.currentTarget.parentNode.dataset.id
-    );
-    this.state.contacts.splice(x, 1);
-  };
+deleteContact = (contactId)=>{
+  this.setState(prevState =>({
+    contacts: prevState.contacts.filter(contact => contact.name !== contactId)
+  }))
+}
+
+  // onClickDelete = (e) => {
+  //   let x = this.state.contacts.findIndex(
+  //     (contact) => contact.name === e.currentTarget.parentNode.dataset.id
+  //   );
+  //   this.state.contacts.splice(x, 1);
+  // };
 
   render() {
     return (
@@ -67,7 +73,7 @@ class App extends Component {
           <ContactList
             contacts={this.state.contacts}
             filter={this.state.filter}
-            onClick={this.onClickDelete}
+            onClick={this.deleteContact}
           />
         )}
       </div>
