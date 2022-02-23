@@ -17,7 +17,7 @@ class App extends Component {
 
     let exist = false;
     this.state.contacts.forEach((contact) => {
-      if (contact.name === data.name) {
+      if (contact.name.toLowerCase() === data.name.toLowerCase()) {
         exist = true;
       }
     });

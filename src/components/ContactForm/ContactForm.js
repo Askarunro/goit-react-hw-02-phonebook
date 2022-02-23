@@ -1,5 +1,6 @@
 import f from "./ContactForm.module.css";
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 // {onSubmit,onChangeInput,nameValue,numberValue}
 
 class Form extends Component {
@@ -58,3 +59,7 @@ class Form extends Component {
 }
 
 export default Form;
+
+Form.prototype={
+  onSubmit: PropTypes.func,
+}

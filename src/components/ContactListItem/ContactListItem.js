@@ -1,4 +1,5 @@
 import i from './ContactListItem.module.css'
+import PropTypes from 'prop-types';
 
 function Item({contacts,filter,onClick}) {
   return (
@@ -19,3 +20,9 @@ function Item({contacts,filter,onClick}) {
 }
 
 export default Item;
+
+Item.propTypes={
+  contacts: PropTypes.array,
+  filter: PropTypes.string,
+  onClick: PropTypes.func,
+}

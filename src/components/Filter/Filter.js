@@ -1,4 +1,5 @@
 import l from './Filter.module.css'
+import PropTypes from 'prop-types';
 
 function Filter({onChange}) {
   return (
@@ -10,3 +11,7 @@ function Filter({onChange}) {
 }
 
 export default Filter
+
+Filter.prototype={
+  onChange: PropTypes.func
+}
