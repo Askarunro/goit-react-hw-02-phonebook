@@ -10,7 +10,6 @@ class App extends Component {
   state = {
     contacts: [],
     filter: "",
-    // todos: initialTodos,
   };
 
   formSubmitHandler = (data) => {
@@ -26,20 +25,6 @@ class App extends Component {
         contacts: [ ...this.state.contacts, data]}
       )
     } else alert(`${data.name} is already i contacts`);
-
-
-    // let exist = false;
-    // this.state.contacts.forEach((contact) => {
-    //   if (contact.name === data.name) {
-    //     exist = true;
-    //   }
-    // });
-    // if (!exist) {
-    //   this.state.contacts.push({
-    //     name: data.name,
-    //     number: data.number,
-    //   });
-    // } else alert(`${data.name} is already i contacts`);
   };
 
   onChangeInputFind = (e) => {
@@ -52,12 +37,6 @@ deleteContact = (contactId)=>{
   }))
 }
 
-  // onClickDelete = (e) => {
-  //   let x = this.state.contacts.findIndex(
-  //     (contact) => contact.name === e.currentTarget.parentNode.dataset.id
-  //   );
-  //   this.state.contacts.splice(x, 1);
-  // };
 
   render() {
     return (
